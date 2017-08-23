@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="./css/filmes.css"/>
+		<script src="./JS/filmes.js"></script>
+		<script src="./JS/jquery.min.js"></script>
+	<script>
+		$(function(){
+			console.log(filmes);
+			$.each(filmes, function (indice, filme){
+			
+				var $divSemelhantes = $("<div/>");
+				
+				$.each(filme.titulosSemelhantes, function(i, semelhanteId ){
+					$.each(filmes, function(i, obj){
+						if(semelhanteId==obj.id){
+							$divSemelhantes
+								.append($("<li/>")
+									.text(this.titulo)	
+								)
+								.prepend($("<img / >")
+									.attr("src", this.figura))
+
+						}
+					})
+				});
+				
+				var $divOpinioes = $("<div/>");
+				
+				$.each(filme.opinioes, function(i, obj){
+					$divOpinioes
+						.text(obj.rating+" . " +obj.descricao)
+				});
+				
+				$(".filmes")
+					.append($("<div / >")
+						.addClass("filme")
+						.append($("<h1 / >")
+							.text(filme.titulo)
+						)
+					)
+					
+					.append($("<div / >")
+						.addClass("img")
+						.append($("<img / >")
+							.attr("src", filme.figura)
+						)
+					)
+					
+					.append($("<div / >")
+						.addClass("genero")
+							.append($("<p / >")
+								.text(filme.genero)
+						)
+					)
+					.append($("<div / >")
+						.addClass("classificacao")
+							.append($("<p / >")
+								.text(filme.classificacao)
+						)
+					)
+						
+					.append($("<div / >")
+						.addClass("resumo")
+							.append($("<p / >")
+								.text(filme.resumo)
+							)
+					)
+					.append($("<div / >")
+						.addClass("elenco")
+							.append($("<p / >")
+								.text(filme.elenco)
+							)
+					)
+						
+					.append($divSemelhantes)	
+					.append($divOpinioes)
+							
+			});
+		});
+	</script>
+	</head>
+	<body>
+		<div class="filmes">
+		</div>
+	</body>
+</html>
